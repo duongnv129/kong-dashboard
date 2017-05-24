@@ -14,7 +14,7 @@ import {
 const initialState = fromJS({
   apis: [],
   apis_loading: false,
-  api_error: false
+  apis_error: false
 });
 
 function apiReducer(state = initialState, action) {

@@ -7,7 +7,7 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { makeSelectLoading, makeSelectError } from 'containers/App/selectors';
+import { makeSelectLoading, makeSelectError } from './selectors';
 import Form from './Form';
 import { loadApis } from '../ApiPage/actions';
 
@@ -18,12 +18,7 @@ export class ApiPage extends React.PureComponent {
   }
 
   render() {
-    const { apisLoading, apisLoadingError, apis } = this.props;
-    const apisListProps = {
-      loading: apisLoading,
-      error: apisLoadingError,
-      apis: apis
-    };
+    const { apiLoading, apiLoadingError, api } = this.props;
 
     return (
       <div className="container-fluid">
@@ -48,13 +43,13 @@ export class ApiPage extends React.PureComponent {
 }
 
 ApiPage.propTypes = {
-  apisLoading: React.PropTypes.bool,
-  apisLoadingError: React.PropTypes.oneOfType([
+  apiLoading: React.PropTypes.bool,
+  apiLoadingError: React.PropTypes.oneOfType([
     React.PropTypes.object,
     React.PropTypes.bool,
   ]),
-  apis: React.PropTypes.oneOfType([
-    React.PropTypes.array,
+  api: React.PropTypes.oneOfType([
+    React.PropTypes.object,
     React.PropTypes.bool,
   ]),
   onSubmitForm: React.PropTypes.func,
@@ -70,8 +65,8 @@ export function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  apisLoading: makeSelectLoading(),
-  apisLoadingError: makeSelectLoading(),
+  apiLoading: makeSelectLoading(),
+  apiLoadingError: makeSelectError(),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApiPage);

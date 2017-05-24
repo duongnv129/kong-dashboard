@@ -9,6 +9,6 @@
  * export const YOUR_ACTION_CONSTANT = 'yourproject/YourContainer/YOUR_ACTION_CONSTANT';
  */
 
-export const LOAD_APIS = 'dashboard/Api/LOAD_APIS';
-export const LOAD_APIS_SUCCESS = 'dashboard/Api/LOAD_APIS_SUCCESS';
-export const LOAD_APIS_ERROR = 'dashboard/Api/LOAD_APIS_ERROR';
+export const LOAD_API = 'dashboard/Api/LOAD_API';
+export const LOAD_API_SUCCESS = 'dashboard/Api/LOAD_API_SUCCESS';
+export const LOAD_API_ERROR = 'dashboard/Api/LOAD_API_ERROR';

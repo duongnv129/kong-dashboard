@@ -4,7 +4,7 @@
 
 import { take, call, put, select, cancel, takeLatest } from 'redux-saga/effects';
 import { LOAD_APIS } from './constants';
-import { apisLoaded, apiLoadingError } from './actions';
+import { apisLoaded, apisLoadingError } from './actions';
 
 import request from 'utils/request';
 
@@ -18,7 +18,7 @@ export function* getApis() {
     const apis = yield call(request, requestURL);
     yield put(apisLoaded(apis));
   } catch (err) {
-    yield put(apiLoadingError(err));
+    yield put(apisLoadingError(err));
   }
 }
 

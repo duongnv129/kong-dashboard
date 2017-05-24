@@ -16,9 +16,9 @@
  */
 
 import {
-  LOAD_APIS,
-  LOAD_APIS_SUCCESS,
-  LOAD_APIS_ERROR,
+  CREATE_API,
+  CREATE_API_SUCCESS,
+  CREATE_API_ERROR,
 } from './constants';
 
 /**
@@ -26,22 +26,23 @@ import {
  * *
  * @return {object}    An action object with a type of LOAD_APIS
  */
-export function loadApis() {
+export function createApi(api) {
   return {
-    type: LOAD_APIS,
+    type: CREATE_API,
+    api
   };
 }
 
-export function apisLoaded(apis) {
+export function apiCreated(api) {
   return {
-    type: LOAD_APIS_SUCCESS,
-    apis
+    type: CREATE_API_SUCCESS,
+    api
   }
 }
 
-export function apiLoadingError(error) {
+export function apiCreatingError(error) {
   return {
-    type: LOAD_APIS_ERROR,
+    type: CREATE_API_ERROR,
     error
   }
 }

@@ -61,18 +61,18 @@ export default function createRoutes(store) {
       },
     }, {
       path: 'apis/new',
-      name: 'new_api',
+      name: 'apiCreate',
       getComponent(nextState, cb) {
         const importModules = Promise.all([
-          import('containers/NewApiPage/reducer'),
-          import('containers/NewApiPage/sagas'),
-          import('containers/NewApiPage'),
+          import('containers/ApiCreatePage/reducer'),
+          import('containers/ApiCreatePage/sagas'),
+          import('containers/ApiCreatePage'),
         ]);
 
         const renderRoute = loadModule(cb);
 
         importModules.then(([reducer, sagas, component]) => {
-          injectReducer('new_api', reducer.default);
+          injectReducer('apiCreate', reducer.default);
           injectSagas(sagas.default);
 
           renderRoute(component);
