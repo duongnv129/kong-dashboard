@@ -1,0 +1,35 @@
+/**
+ * Created by duong on 5/24/17.
+ */
+
+import { take, call, put, select, cancel, takeLatest } from 'redux-saga/effects';
+import { LOAD_APIS } from 'containers/ApiPage/constants';
+import { apisLoaded, apiLoadingError } from 'containers/ApiPage/actions';
+
+import request from 'utils/request';
+
+/**
+ * Github repos request/response handler
+ */
+export function* getApis() {
+  const requestURL = 'http://localhost:8001/apis';
+
+  try {
+    const apis = yield call(request, requestURL);
+    yield put(apisLoaded(apis));
+  } catch (err) {
+    yield put(apiLoadingError(err));
+  }
+}
+
+/**
+ * Root saga manages watcher lifecycle
+ */
+export function* apis() {
+  yield takeLatest(LOAD_APIS, getApis())
+}
+
+// Bootstrap sagas
+export default [
+  apis,
+];
