@@ -60,6 +60,27 @@ export default function createRoutes(store) {
         importModules.catch(errorLoading);
       },
     }, {
+      path: 'apis/new',
+      name: 'new_api',
+      getComponent(nextState, cb) {
+        const importModules = Promise.all([
+          import('containers/NewApiPage/reducer'),
+          import('containers/NewApiPage/sagas'),
+          import('containers/NewApiPage'),
+        ]);
+
+        const renderRoute = loadModule(cb);
+
+        importModules.then(([reducer, sagas, component]) => {
+          injectReducer('new_api', reducer.default);
+          injectSagas(sagas.default);
+
+          renderRoute(component);
+        });
+
+        importModules.catch(errorLoading);
+      },
+    }, {
       path: '*',
       name: 'notfound',
       getComponent(nextState, cb) {

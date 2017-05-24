@@ -5,11 +5,11 @@
 import React from 'react';
 import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
-import { Link } from 'react-router';
 import { createStructuredSelector } from 'reselect';
 
 import { makeSelectLoading, makeSelectError } from 'containers/App/selectors';
-import { loadApis } from './actions';
+import Form from './Form';
+import { loadApis } from '../ApiPage/actions';
 
 export class ApiPage extends React.PureComponent {
 
@@ -28,22 +28,19 @@ export class ApiPage extends React.PureComponent {
     return (
       <div className="container-fluid">
         <Helmet
-          title="APIs Page"
+          title="New API Page"
           meta={[
             { name: 'description', content: 'Kong Dashboard application api page' },
           ]}
         />
         <div className="row">
           <div className="col-lg-12">
-            <Link to="/apis/new">Add</Link>
+            <Form onSubmit={this.props.onSubmitForm}>
+              <div className="form-group">
+                <label></label>
+              </div>
+            </Form>
           </div>
-          <div className="col-lg-12">
-            <div className="row">
-              <div className="col-lg-2">Name</div>
-              <div className="col-lg-2">Host</div>
-            </div>
-          </div>
-
         </div>
       </div>
     );
@@ -60,12 +57,13 @@ ApiPage.propTypes = {
     React.PropTypes.array,
     React.PropTypes.bool,
   ]),
-  getApiList: React.PropTypes.func,
+  onSubmitForm: React.PropTypes.func,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
-    getApiList: () => {
+    onSubmitForm: (evt) => {
+      if (evt !== undefined && evt.preventDefault) evt.preventDefault();
       dispatch(loadApis());
     }
   };
