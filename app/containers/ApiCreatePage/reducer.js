@@ -7,7 +7,10 @@ import { fromJS } from 'immutable';
 import {
   CREATE_API,
   CREATE_API_SUCCESS,
-  CREATE_API_ERROR
+  CREATE_API_ERROR,
+  CHANGE_API_NAME,
+  CHANGE_API_HOST,
+  CHANGE_API_UPSTREAM
 } from './constants';
 
 // The initial state of the App
@@ -35,6 +38,15 @@ function apiCreateReducer(state = initialState, action) {
       return state
         .set('apiCreateLoading', false)
         .set('apiCreatingError', action.error);
+    case CHANGE_API_NAME:
+      return state
+        .set('name', action.name);
+    case CHANGE_API_HOST:
+      return state
+        .set('host', action.host);
+    case CHANGE_API_UPSTREAM:
+      return state
+        .set('upstream', action.upstream);
     default:
       return state;
   }

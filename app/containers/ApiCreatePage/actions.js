@@ -19,6 +19,9 @@ import {
   CREATE_API,
   CREATE_API_SUCCESS,
   CREATE_API_ERROR,
+  CHANGE_API_NAME,
+  CHANGE_API_HOST,
+  CHANGE_API_UPSTREAM
 } from './constants';
 
 /**
@@ -44,5 +47,26 @@ export function apiCreatingError(error) {
   return {
     type: CREATE_API_ERROR,
     error
+  }
+}
+
+export function changeApiName(name) {
+  return {
+    type: CHANGE_API_NAME,
+    name
+  }
+}
+
+export function changeApiHost(host) {
+  return {
+    type: CHANGE_API_HOST,
+    host
+  }
+}
+
+export function changeApiUpstream(upstream) {
+  return {
+    type: CHANGE_API_UPSTREAM,
+    upstream
   }
 }

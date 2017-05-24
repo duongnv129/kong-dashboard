@@ -21,9 +21,27 @@ const makeSelectError = () => createSelector(
   (apiCreateState) => apiCreateState.get('error')
 );
 
+const makeSelectName = () => createSelector(
+  selectApiCreate,
+  (apiCreateState) => apiCreateState.get('name')
+);
+
+const makeSelectHost = () => createSelector(
+  selectApiCreate,
+  (apiCreateState) => apiCreateState.get('host')
+);
+
+const makeSelectUpstream = () => createSelector(
+  selectApiCreate,
+  (apiCreateState) => apiCreateState.get('upstream')
+);
+
 export {
   selectApiCreate,
   makeSelectApi,
   makeSelectLoading,
-  makeSelectError
+  makeSelectError,
+  makeSelectName,
+  makeSelectHost,
+  makeSelectUpstream
 };

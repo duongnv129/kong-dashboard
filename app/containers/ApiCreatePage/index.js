@@ -7,7 +7,7 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { makeSelectLoading, makeSelectError } from './selectors';
+import { makeSelectLoading, makeSelectError, makeSelectName, makeSelectHost, makeSelectUpstream } from './selectors';
 import Form from './Form';
 import { createApi } from './actions';
 
@@ -67,6 +67,9 @@ ApiCreatePage.propTypes = {
     React.PropTypes.bool,
   ]),
   onSubmitForm: React.PropTypes.func,
+  name: React.PropTypes.string,
+  host: React.PropTypes.string,
+  upstream: React.PropTypes.string,
 };
 
 export function mapDispatchToProps(dispatch) {
@@ -82,6 +85,9 @@ export function mapDispatchToProps(dispatch) {
 const mapStateToProps = createStructuredSelector({
   apiCreateLoading: makeSelectLoading(),
   apiCreateLoadingError: makeSelectError(),
+  name: makeSelectName(),
+  host: makeSelectHost(),
+  upstream: makeSelectUpstream()
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApiCreatePage);

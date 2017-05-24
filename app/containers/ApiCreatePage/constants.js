@@ -12,3 +12,7 @@
 export const CREATE_API = 'dashboard/Api/CREATE_API';
 export const CREATE_API_SUCCESS = 'dashboard/Api/CREATE_API_SUCCESS';
 export const CREATE_API_ERROR = 'dashboard/Api/CREATE_API_ERROR';
+
+export const CHANGE_API_NAME = 'dashboard/Api/CHANGE_API_NAME';
+export const CHANGE_API_HOST = 'dashboard/Api/CHANGE_API_HOST';
+export const CHANGE_API_UPSTREAM = 'dashboard/Api/CHANGE_API_UPSTREAM';
