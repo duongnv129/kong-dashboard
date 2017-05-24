@@ -17,6 +17,7 @@ import { syncHistoryWithStore } from 'react-router-redux';
 import FontFaceObserver from 'fontfaceobserver';
 import { useScroll } from 'react-router-scroll';
 import 'sanitize.css/sanitize.css';
+import 'bootstrap-css-only/css/bootstrap.min.css';
 
 // Import root app
 import App from 'containers/App';
