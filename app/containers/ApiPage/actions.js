@@ -32,10 +32,11 @@ export function loadApis() {
   };
 }
 
-export function apisLoaded(apis) {
+export function apisLoaded(apis, total) {
   return {
     type: LOAD_APIS_SUCCESS,
-    apis
+    apis,
+    total
   }
 }
 

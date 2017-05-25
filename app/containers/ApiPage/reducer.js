@@ -13,6 +13,7 @@ import {
 // The initial state of the App
 const initialState = fromJS({
   apis: false,
+  total: 0,
   loading: false,
   error: false
 });
@@ -26,7 +27,8 @@ function apiReducer(state = initialState, action) {
     case LOAD_APIS_SUCCESS:
       return state
         .set('loading', false)
-        .set('apis', action.apis);
+        .set('apis', action.apis)
+        .set('total', action.total);
     case LOAD_APIS_ERROR:
       return state
         .set('loading', false)

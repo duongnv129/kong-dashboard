@@ -12,11 +12,11 @@ import request from 'utils/request';
  * Github repos request/response handler
  */
 export function* getApis() {
-  const requestURL = 'http://localhost:8001/apis';
+  const requestURL = 'http://10.10.1.118:8001/apis';
 
   try {
-    const apis = yield call(request, requestURL);
-    yield put(apisLoaded(apis));
+    const result = yield call(request, requestURL);
+    yield put(apisLoaded(result.data, result.total));
   } catch (err) {
     yield put(apisLoadingError(err));
   }

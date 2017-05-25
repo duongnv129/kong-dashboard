@@ -8,7 +8,9 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router';
 import { createStructuredSelector } from 'reselect';
 
-import { makeSelectLoading, makeSelectError } from 'containers/App/selectors';
+import ApisList from 'components/ApisList';
+
+import { makeSelectLoading, makeSelectError, makeSelectApi } from './selectors';
 import { loadApis } from './actions';
 
 export class ApiPage extends React.PureComponent {
@@ -18,11 +20,11 @@ export class ApiPage extends React.PureComponent {
   }
 
   render() {
-    const { apisLoading, apisLoadingError, apis } = this.props;
+    const { loading, error, apis } = this.props;
     const apisListProps = {
-      loading: apisLoading,
-      error: apisLoadingError,
-      apis: apis
+      loading,
+      error,
+      apis
     };
 
     return (
@@ -43,7 +45,7 @@ export class ApiPage extends React.PureComponent {
               <div className="col-lg-2">Host</div>
             </div>
           </div>
-
+          <ApisList {...apisListProps} />
         </div>
       </div>
     );
@@ -51,8 +53,8 @@ export class ApiPage extends React.PureComponent {
 }
 
 ApiPage.propTypes = {
-  apisLoading: React.PropTypes.bool,
-  apisLoadingError: React.PropTypes.oneOfType([
+  loading: React.PropTypes.bool,
+  error: React.PropTypes.oneOfType([
     React.PropTypes.object,
     React.PropTypes.bool,
   ]),
@@ -72,8 +74,9 @@ export function mapDispatchToProps(dispatch) {
 }
 
 const mapStateToProps = createStructuredSelector({
-  apisLoading: makeSelectLoading(),
-  apisLoadingError: makeSelectLoading(),
+  loading: makeSelectLoading(),
+  error: makeSelectLoading(),
+  apis: makeSelectApi(),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApiPage);
