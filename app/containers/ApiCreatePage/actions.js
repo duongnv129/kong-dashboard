@@ -20,8 +20,8 @@ import {
   CREATE_API_SUCCESS,
   CREATE_API_ERROR,
   CHANGE_API_NAME,
-  CHANGE_API_HOST,
-  CHANGE_API_UPSTREAM
+  CHANGE_API_HOSTS,
+  CHANGE_API_UPSTREAM_URL,
 } from './constants';
 
 /**
@@ -29,10 +29,9 @@ import {
  * *
  * @return {object}    An action object with a type of LOAD_APIS
  */
-export function createApi(api) {
+export function createApi() {
   return {
     type: CREATE_API,
-    api
   };
 }
 
@@ -57,16 +56,16 @@ export function changeApiName(name) {
   }
 }
 
-export function changeApiHost(host) {
+export function changeApiHosts(hosts) {
   return {
-    type: CHANGE_API_HOST,
-    host
+    type: CHANGE_API_HOSTS,
+    hosts
   }
 }
 
-export function changeApiUpstream(upstream) {
+export function changeApiUpstreamUrl(upstreamUrl) {
   return {
-    type: CHANGE_API_UPSTREAM,
-    upstream
+    type: CHANGE_API_UPSTREAM_URL,
+    upstreamUrl
   }
 }

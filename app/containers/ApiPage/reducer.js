@@ -12,26 +12,25 @@ import {
 
 // The initial state of the App
 const initialState = fromJS({
-  apis: [],
-  apis_loading: false,
-  apis_error: false
+  apis: false,
+  loading: false,
+  error: false
 });
 
 function apiReducer(state = initialState, action) {
   switch (action.type) {
     case LOAD_APIS:
       return state
-        .set('apis_loading', true)
-        .set('apis_error', false)
-        .set('apis', false);
+        .set('loading', true)
+        .set('error', false);
     case LOAD_APIS_SUCCESS:
       return state
-        .set('apis_loading', false)
+        .set('loading', false)
         .set('apis', action.apis);
     case LOAD_APIS_ERROR:
       return state
-        .set('apis_loading', false)
-        .set('apis_error', action.error);
+        .set('loading', false)
+        .set('error', action.error);
     default:
       return state;
   }

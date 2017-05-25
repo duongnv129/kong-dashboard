@@ -9,44 +9,44 @@ import {
   CREATE_API_SUCCESS,
   CREATE_API_ERROR,
   CHANGE_API_NAME,
-  CHANGE_API_HOST,
-  CHANGE_API_UPSTREAM
+  CHANGE_API_HOSTS,
+  CHANGE_API_UPSTREAM_URL
 } from './constants';
 
 // The initial state of the App
 const initialState = fromJS({
-  api: false,
-  apiCreateLoading: false,
-  apiCreatingError: false,
-  name: '',
-  host: '',
-  upstream: ''
+  api: {
+    name: '1',
+    hosts: '1',
+    upstreamUrl: '1'
+  },
+  loading: false,
+  error: false,
 });
 
 function apiCreateReducer(state = initialState, action) {
   switch (action.type) {
     case CREATE_API:
       return state
-        .set('apiCreateLoading', true)
-        .set('apiCreatingError', false)
-        .set('api', false);
+        .set('loading', true)
+        .set('error', false);
     case CREATE_API_SUCCESS:
       return state
-        .set('apiCreateLoading', false)
+        .set('loading', false)
         .set('api', action.api);
     case CREATE_API_ERROR:
       return state
-        .set('apiCreateLoading', false)
-        .set('apiCreatingError', action.error);
+        .set('loading', false)
+        .set('error', action.error);
     case CHANGE_API_NAME:
       return state
-        .set('name', action.name);
-    case CHANGE_API_HOST:
+        .setIn(['api', 'name'], action.name);
+    case CHANGE_API_HOSTS:
       return state
-        .set('host', action.host);
-    case CHANGE_API_UPSTREAM:
+        .setIn(['api', 'hosts'], action.hosts);
+    case CHANGE_API_UPSTREAM_URL:
       return state
-        .set('upstream', action.upstream);
+        .setIn(['api', 'upstreamUrl'], action.upstreamUrl);
     default:
       return state;
   }

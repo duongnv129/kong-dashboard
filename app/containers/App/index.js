@@ -15,12 +15,11 @@ import Footer from 'components/Footer';
 import withProgressBar from 'components/ProgressBar';
 
 const AppWrapper = styled.div`
-  min-height: 100%;
 `;
 
 export function App(props) {
   return (
-    <AppWrapper>
+    <AppWrapper className="container">
       <Helmet
         titleTemplate="%s - Kong Dashboard"
         defaultTitle="Kong Dashboard"

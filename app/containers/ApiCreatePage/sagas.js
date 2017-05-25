@@ -3,23 +3,28 @@
  */
 
 import { take, call, put, select, cancel, takeLatest } from 'redux-saga/effects';
+import { browserHistory } from 'react-router';
+
 import { CREATE_API } from './constants';
 import { apiCreated, apiCreatingError } from './actions';
-
-import request from 'utils/request';
+import { makeSelectName, makeSelectHosts, makeSelectUpstreamUrl } from './selectors'
+import ApiService from 'components/Services/ApiService';
 
 /**
  * Github repos request/response handler
  */
-export function* apiCreating(action) {
-  const api = action.api;
-  console.log(api);
-  const requestURL = 'http://localhost:8001/apis';
-  try {
-    const api = yield call(request, requestURL);
-    yield put(apiCreated(api));
-  } catch (err) {
-    yield put(apiCreatingError(err));
+export function* apiCreating() {
+  const name = yield select(makeSelectName());
+  const hosts = yield select(makeSelectHosts());
+  const upstreamUrl = yield select(makeSelectUpstreamUrl());
+
+  const { response, error } = yield call(ApiService.create, { name: name, hosts: hosts, upstreamUrl: upstreamUrl });
+
+  if (response){
+    yield put(apiCreated(response));
+    forwardTo('/apis');
+  }else {
+    yield put(apiCreatingError(error));
   }
 }
 
@@ -28,6 +33,10 @@ export function* apiCreating(action) {
  */
 export function* createApi() {
   yield takeLatest(CREATE_API, apiCreating)
+}
+
+function forwardTo(location) {
+  browserHistory.push(location);
 }
 
 // Bootstrap sagas

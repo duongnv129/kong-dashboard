@@ -7,9 +7,17 @@ import Helmet from 'react-helmet';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 
-import { makeSelectLoading, makeSelectError, makeSelectName, makeSelectHost, makeSelectUpstream } from './selectors';
 import Form from './Form';
-import { createApi } from './actions';
+import { createApi, changeApiName, changeApiHosts, changeApiUpstreamUrl } from './actions';
+
+import {
+  makeSelectLoading,
+  makeSelectError,
+  makeSelectApi,
+  makeSelectName,
+  makeSelectHosts,
+  makeSelectUpstreamUrl,
+} from './selectors';
 
 export class ApiCreatePage extends React.PureComponent {
 
@@ -17,8 +25,6 @@ export class ApiCreatePage extends React.PureComponent {
   }
 
   render() {
-    const { apiLoading, apiLoadingError, api } = this.props;
-
     return (
       <div className="container-fluid">
         <Helmet
@@ -32,17 +38,38 @@ export class ApiCreatePage extends React.PureComponent {
             <Form onSubmit={this.props.onSubmitForm}>
               <div className="form-group">
                 <label>Name</label>
-                <input type="text" className="form-control" placeholder="Name" name="name" />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Name"
+                  name="name"
+                  value={this.props.name}
+                  onChange={this.props.onChangeName}
+                />
               </div>
 
               <div className="form-group">
                 <label>Host</label>
-                <input type="text" className="form-control" placeholder="Host" name="host" />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Host"
+                  name="hosts"
+                  value={this.props.hosts}
+                  onChange={this.props.onChangeHost}
+                />
               </div>
 
               <div className="form-group">
                 <label>Upstream</label>
-                <input type="text" className="form-control" placeholder="Upstream" name="upstream" />
+                <input
+                  type="text"
+                  className="form-control"
+                  placeholder="Upstream"
+                  name="upstreamUrl"
+                  value={this.props.upstreamUrl}
+                  onChange={this.props.onChangeUpstream}
+                />
               </div>
 
               <div>
@@ -57,37 +84,40 @@ export class ApiCreatePage extends React.PureComponent {
 }
 
 ApiCreatePage.propTypes = {
-  apiCreateLoading: React.PropTypes.bool,
-  apiCreateLoadingError: React.PropTypes.oneOfType([
+  loading: React.PropTypes.bool,
+  error: React.PropTypes.oneOfType([
     React.PropTypes.object,
     React.PropTypes.bool,
   ]),
-  api: React.PropTypes.oneOfType([
-    React.PropTypes.object,
-    React.PropTypes.bool,
-  ]),
+  api: React.PropTypes.object,
   onSubmitForm: React.PropTypes.func,
+  onChangeName: React.PropTypes.func,
+  onChangeHosts: React.PropTypes.func,
+  onChangeUpstreamUrl: React.PropTypes.func,
   name: React.PropTypes.string,
-  host: React.PropTypes.string,
-  upstream: React.PropTypes.string,
+  hosts: React.PropTypes.string,
+  upstreamUrl: React.PropTypes.string,
 };
 
 export function mapDispatchToProps(dispatch) {
   return {
     onSubmitForm: (evt) => {
       if (evt !== undefined && evt.preventDefault) evt.preventDefault();
-      console.log(evt);
-      dispatch(createApi({ name: 'test' }));
-    }
+      dispatch(createApi());
+    },
+    onChangeName: (evt) => dispatch(changeApiName(evt.target.value)),
+    onChangeHost: (evt) => dispatch(changeApiHosts(evt.target.value)),
+    onChangeUpstream: (evt) => dispatch(changeApiUpstreamUrl(evt.target.value)),
   };
 }
 
 const mapStateToProps = createStructuredSelector({
-  apiCreateLoading: makeSelectLoading(),
-  apiCreateLoadingError: makeSelectError(),
+  loading: makeSelectLoading(),
+  error: makeSelectError(),
+  api: makeSelectApi(),
   name: makeSelectName(),
-  host: makeSelectHost(),
-  upstream: makeSelectUpstream()
+  hosts: makeSelectHosts(),
+  upstreamUrl: makeSelectUpstreamUrl(),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ApiCreatePage);

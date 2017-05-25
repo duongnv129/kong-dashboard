@@ -14,5 +14,5 @@ export const CREATE_API_SUCCESS = 'dashboard/Api/CREATE_API_SUCCESS';
 export const CREATE_API_ERROR = 'dashboard/Api/CREATE_API_ERROR';
 
 export const CHANGE_API_NAME = 'dashboard/Api/CHANGE_API_NAME';
-export const CHANGE_API_HOST = 'dashboard/Api/CHANGE_API_HOST';
-export const CHANGE_API_UPSTREAM = 'dashboard/Api/CHANGE_API_UPSTREAM';
+export const CHANGE_API_HOSTS = 'dashboard/Api/CHANGE_API_HOSTS';
+export const CHANGE_API_UPSTREAM_URL = 'dashboard/Api/CHANGE_API_UPSTREAM_URL';
